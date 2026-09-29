@@ -20,7 +20,7 @@ pipeline{
         }
         stage('Check Docker'){
             steps{
-                bat 'decker --version'
+                bat '"C:/Users/DELL/AppData/Local/Programs/DockerDesktop/resources/bin/docker.exe" --version'
             }
         }
         stage('Dependencies'){
@@ -35,13 +35,13 @@ pipeline{
         }
         stage('Build'){
             steps{
-                bat 'docker build -t %IMAGE_NAME%:%BUILD_NUMBER% .'
+                bat '"C:/Users/DELL/AppData/Local/Programs/DockerDesktop/resources/bin/docker.exe" build -t %IMAGE_NAME%:%BUILD_NUMBER% .'
             }
         }
-        stage('RUn Container'){
+        stage('Run Container'){
             steps{
                 bat '''
-                    docker run -d --name node-app-%BUILD_NUMBER% -p %APP_PORT%:3000 %IMAGE_NAME%:%BUILD_NUMBER%
+                    "C:/Users/DELL/AppData/Local/Programs/DockerDesktop/resources/bin/docker.exe" run -d --name node-app-%BUILD_NUMBER% -p %APP_PORT%:3000 %IMAGE_NAME%:%BUILD_NUMBER%
                 '''
             }
         }
@@ -50,7 +50,7 @@ pipeline{
                 bat '''
                     echo APP Deployed Successfully
                     echo Open http://localhost:%APP_PORT%
-                    docker ps
+                    "C:/Users/DELL/AppData/Local/Programs/DockerDesktop/resources/bin/docker.exe" ps
                 '''
             }
         }
